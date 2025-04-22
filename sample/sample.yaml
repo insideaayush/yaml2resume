@@ -1,0 +1,55 @@
+name: Your Name
+tagline: Your Professional Title
+
+contact:
+  email: your.email@example.com
+  phone: "+65-00000000"
+  location: Your City, Country
+  linkedin: https://linkedin.com/in/yourprofile
+  github:
+    personal: https://github.com/yourhandle
+
+summary: >
+  A brief paragraph about you — your focus, experience, values, and goals.
+
+skills:
+  programming_languages:
+    - Python
+    - Go
+    - JavaScript
+  cloud_and_data_platforms:
+    - AWS (Lambda, EC2)
+    - PostgreSQL
+    - Redis
+
+experience:
+  - company: Example Corp
+    role: Backend Engineer
+    location: Remote
+    start_date: Jan 2021
+    end_date: Present
+    bullets:
+      - Built and maintained API services in Go
+      - Integrated third-party APIs for payment and identity
+
+education:
+  - degree: B.Tech in Computer Science
+    university: Your University
+    period: Aug 2015 – May 2019
+    location: City, Country
+
+projects:
+  - name: My Side Project
+    description: >
+      A short explanation of the goal or result of the project
+    bullets:
+      - Used FastAPI and SQLite to build the backend
+      - Deployed on Fly.io
+
+interests:
+  - Photography
+  - Writing blog posts
+  - Contributing to open source
+
+achievements:
+  - Hackathon winner 2021 at XYZ event
