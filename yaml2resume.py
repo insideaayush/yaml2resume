@@ -14,17 +14,80 @@ def build_html(resume):
     github_links = format_github_links(resume["contact"]["github"])
 
     css = """
-    <style>
-    @page { size: A4; margin: 19mm; }
-    body { font-family: 'Open Sans', sans-serif; font-size: 10.5pt; color: #222; line-height: 1.6; }
-    .resume-container { max-width: 720px; margin: auto; padding: 16px; }
-    .section { margin-top: 36px; padding-top: 10px; border-top: 1px solid #ccc; }
-    h1 { font-size: 22pt; font-weight: bold; margin-bottom: 5px; }
-    h2 { font-size: 13pt; color: #333; margin-top: 20px; }
-    h3 { font-size: 11.5pt; font-weight: bold; margin-top: 12px; }
-    ul { margin-left: 20px; }
-    a { color: #00449e; text-decoration: none; }
-    </style>
+<style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    body {
+      font-family: 'Inter', 'Segoe UI', 'Open Sans', sans-serif;
+      font-size: 11pt;
+      color: #111;
+      line-height: 1.6;
+      background-color: #fff;
+    }
+    .resume-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 0 20px;
+    }
+    h1 {
+      font-size: 28pt;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #000;
+      border-bottom: 3px solid #000;
+      padding-bottom: 6px;
+    }
+    h2 {
+      font-size: 16pt;
+      font-weight: 700;
+      color: #000;
+      margin-top: 36px;
+      border-bottom: 1px solid #000;
+      padding-bottom: 4px;
+    }
+    h3 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #000;
+      margin-top: 16px;
+    }
+    p {
+      margin: 4px 0;
+    }
+    ul {
+      margin: 6px 0 12px 20px;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+    a {
+      color: #000;
+      text-decoration: none;
+    }
+    .contact p, .contact a {
+      display: inline-block;
+      margin-right: 12px;
+    }
+    .section {
+      margin-top: 24px;
+    }
+    .print-note {
+      font-size: 8pt;
+      color: #888;
+      text-align: center;
+      margin-top: 20px;
+    }
+    @media print {
+      a::after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+      }
+      .print-note { display: none; }
+    }
+  </style>
     """
 
     html = f"""<!DOCTYPE html>
@@ -42,15 +105,15 @@ def build_html(resume):
     </p>
 
     <div class="section"><h2>Summary</h2><p>{resume['summary']}</p></div>
+    
+    <div class="section"><h2>Work Experience</h2>
+        {"".join(
+            f"<div><h3>{j.get('display_name', j['company'])}</h3><p><strong>{j['role']}</strong> | {j['start_date']} – {j['end_date']} | {j['location']}</p><ul>{''.join(f'<li>{b}</li>' for b in j['bullets'])}</ul></div>"
+            for j in resume['experience'])}
+    </div>
 
     <div class="section"><h2>Skills</h2>
         {"".join(f"<h3>{k.replace('_',' ').title()}</h3><p>{', '.join(v)}</p>" for k, v in resume['skills'].items())}
-    </div>
-
-    <div class="section"><h2>Work Experience</h2>
-        {"".join(
-            f"<div><h3>{j['role']}</h3><p><strong>{j.get('display_name', j['company'])}</strong> | {j['start_date']} – {j['end_date']} | {j['location']}</p><ul>{''.join(f'<li>{b}</li>' for b in j['bullets'])}</ul></div>"
-            for j in resume['experience'])}
     </div>
 
     <div class="section"><h2>Education</h2>
@@ -86,8 +149,10 @@ def generate_resume_html(input_path: str, output_path: str = "sample.html") -> N
 
 def main():
     # Customize this if running standalone
-    input_path = "sample/sample.yaml"
-    output_path = "sample/sample.html"
+    # input_path = "sample/sample.yaml"
+    # output_path = "sample/sample.html"
+    input_path = "sample/resume_aayush_gautam_ATS_fixed.yaml"
+    output_path = "sample/aayush_gautam_resume.html"
     generate_resume_html(input_path, output_path)
 
 if __name__ == "__main__":
