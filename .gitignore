@@ -4,3 +4,4 @@ local/
 sample/*.html
 *.pdf
 .DS_Store
+interview_prep_todo.md

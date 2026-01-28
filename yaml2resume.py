@@ -88,12 +88,12 @@ def main():
     parser = argparse.ArgumentParser(description="Generate an HTML resume from a YAML file.")
     parser.add_argument(
         "-i", "--input",
-        default="sample/resume_aayush_gautam_ATS_fixed.yaml",
+        default="sample/sample.yaml",
         help="Path to the input YAML resume file."
     )
     parser.add_argument(
         "-o", "--output",
-        default="sample/aayush_gautam_resume.html",
+        default="sample/sample.html",
         help="Path to the output HTML file."
     )
     parser.add_argument(
