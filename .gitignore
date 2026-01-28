@@ -1,1 +1,6 @@
 venv/
+local/
+/*.html
+sample/*.html
+*.pdf
+.DS_Store

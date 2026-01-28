@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ resume.name }} - Resume</title>
+        <style>
+        {{ css }}
+        </style>
+    </head>
+    <body>
+        <div class="resume-container">
+            <h1>{{ resume.name }}</h1>
+            <p>
+                <strong>{{ resume.tagline }}</strong>
+            </p>
+            <div class="contact-info">
+                <div class="contact-col">
+                    {% for item in contact_col1 %}
+                        <p><strong>{{ item.key }}:</strong>
+                        {% if item.is_link %}
+                            <a href="{{ item.url }}" target="_blank">{{ item.value }}</a>
+                        {% else %}
+                            {{ item.value }}
+                        {% endif %}
+                        </p>
+                    {% endfor %}
+                </div>
+                <div class="contact-col">
+                    {% for item in contact_col2 %}
+                        <p><strong>{{ item.key }}:</strong>
+                        {% if item.is_link %}
+                            <a href="{{ item.url }}" target="_blank">{{ item.value }}</a>
+                        {% else %}
+                            {{ item.value }}
+                        {% endif %}
+                        </p>
+                    {% endfor %}
+                    {% if github_links %}
+                    <p><strong>GitHub:</strong><br>{{ github_links }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% if resume.summary %}
+            <div class="section">
+                <h2>Summary</h2>
+                <p>{{ resume.summary | markdown | safe }}</p>
+            </div>
+            {% endif %}
+
+        {% if resume.experience %}
+            <div class="section">
+                <h2>Work Experience</h2>
+                {% for job in resume.experience %}
+                <div>
+                    <h3>{{ job.get('display_name', job.company) }}</h3>
+                    <p>
+                        <strong>{{ job.role }}</strong> | {{ job.start_date }} – {{ job.end_date }} | {{ job.location }}
+                    </p>
+                    <ul>
+                        {% for bullet in job.bullets %}
+                        <li>{{ bullet | markdown | safe }}</li>
+                        {% endfor %}
+                        
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        {% if resume.skills %}
+            <div class="section">
+                <h2>Skills</h2>
+                {% for skill_category, skills in resume.skills.items() %}
+                <h3>{{ skill_category.replace('_', ' ') | title }}</h3>
+                <p>{{ skills | join(', ') }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        {% if resume.education %}
+            <div class="section">
+                <h2>Education</h2>
+                {% for edu in resume.education %}
+                <p>
+                    <strong>{{ edu.degree }}</strong> | {{ edu.university }} ({{ edu.period }})
+                    <br>
+                    Location: {{ edu.location }}
+                </p>
+                    {% if edu.bullets %}
+                    <ul>
+                        {% for bullet in edu.bullets %}
+                        <li>{{ bullet | markdown | safe }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        {% if resume.projects %}
+            <div class="section">
+                <h2>Projects</h2>
+                {% for project in resume.projects %}
+                <div>
+                    <h3>{{ project.name }}</h3>
+                    <p>{{ project.description | markdown | safe }}</p>
+                    <ul>
+                        {% for bullet in project.bullets %}
+                        <li>{{ bullet | markdown | safe }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        {% if resume.interests %}
+            <div class="section">
+                <h2>Interests</h2>
+                <p>{{ resume.interests | join(', ') }}</p>
+            </div>
+            {% endif %}
+
+        {% if resume.achievements %}
+            <div class="section">
+                <h2>Achievements</h2>
+                <ul>
+                    {% for achievement in resume.achievements %}
+                    <li>{{ achievement | markdown | safe }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </body>
+</html>
